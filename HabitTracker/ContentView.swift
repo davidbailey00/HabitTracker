@@ -16,11 +16,23 @@ struct ContentView: View {
             List {
                 ForEach(habits.items) { item in
                     NavigationLink(destination: Text("TODO")) {
-                        VStack(alignment: .leading) {
-                            Text(item.title)
-                                .font(.headline)
-                            Text(item.description)
-                                .foregroundColor(.secondary)
+                        HStack {
+                            VStack(alignment: .leading) {
+                                Text(item.title)
+                                    .font(.headline)
+                                Text(item.description)
+                                    .foregroundColor(.secondary)
+                            }
+
+                            Spacer()
+
+                            Text("\(item.times)")
+                                .fontWeight(.bold)
+                                .foregroundColor(.white)
+                                .padding(.vertical, 2)
+                                .padding(.horizontal, 8)
+                                .background(Color.purple)
+                                .clipShape(Capsule())
                         }
                     }
                 }
