@@ -14,8 +14,13 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             List {
-                ForEach(habits.items) { item in
-                    NavigationLink(destination: HabitView(habit: item)) {
+                ForEach(
+                    Array(zip(habits.items.indices, habits.items)),
+                    id: \.1.id
+                ) { index, item in
+                    NavigationLink(
+                        destination: HabitView(habit: $habits.items[index])
+                    ) {
                         HStack {
                             VStack(alignment: .leading) {
                                 Text(item.title)
@@ -57,7 +62,7 @@ struct ContentView: View {
                         // @TODO
                     }) {
                         Text("New habit")
-                        Image(systemName: "hourglass.badge.plus")
+                        Image(systemName: "plus")
                     }
                 }
             }

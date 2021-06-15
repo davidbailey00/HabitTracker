@@ -9,9 +9,9 @@ import Foundation
 
 struct HabitItem: Identifiable, Codable {
     var id = UUID()
-    let title: String
-    let description: String
-    let times: Int
+    var title: String
+    var description: String
+    var times: Int
 
     var formattedTimes: String {
         "\(times) time\(times == 1 ? "" : "s")"
