@@ -15,23 +15,34 @@ struct ContentView: View {
         NavigationView {
             List {
                 ForEach(habits.items) { item in
-                    VStack(alignment: .leading) {
-                        Text(item.title)
-                            .font(.headline)
-                        Text(item.description)
-                            .foregroundColor(.secondary)
+                    NavigationLink(destination: Text("TODO")) {
+                        VStack(alignment: .leading) {
+                            Text(item.title)
+                                .font(.headline)
+                            Text(item.description)
+                                .foregroundColor(.secondary)
+                        }
                     }
+                }
+                .onDelete { offsets in
+                    habits.items.remove(atOffsets: offsets)
+                }
+                .onMove { source, dest in
+                    habits.items.move(fromOffsets: source, toOffset: dest)
                 }
             }
             .listStyle(GroupedListStyle())
             .navigationTitle("Habit Tracker")
             .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    EditButton()
+                }
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: {
                         // @TODO
                     }) {
-                        Image(systemName: "hourglass.badge.plus")
                         Text("New habit")
+                        Image(systemName: "hourglass.badge.plus")
                     }
                 }
             }
