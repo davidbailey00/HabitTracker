@@ -26,13 +26,16 @@ struct ContentView: View {
 
                             Spacer()
 
-                            Text("\(item.times)")
+                            Text(item.formattedTimes)
+                                .font(.caption)
                                 .fontWeight(.bold)
                                 .foregroundColor(.white)
                                 .padding(.vertical, 2)
-                                .padding(.horizontal, 8)
-                                .background(Color.purple)
-                                .clipShape(Capsule())
+                                .padding(.horizontal, 6)
+                                .background(
+                                    item.times < 1 ? Color.purple : Color.green
+                                )
+                                .clipShape(RoundedRectangle(cornerRadius: 6))
                         }
                     }
                 }
