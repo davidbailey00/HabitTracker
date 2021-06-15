@@ -14,15 +14,27 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             List {
-                VStack(alignment: .leading) {
-                    Text("Guitar")
-                        .font(.headline)
-                    Text("Playing the guitar")
-                        .foregroundColor(.secondary)
+                ForEach(habits.items) { item in
+                    VStack(alignment: .leading) {
+                        Text(item.title)
+                            .font(.headline)
+                        Text(item.description)
+                            .foregroundColor(.secondary)
+                    }
                 }
             }
             .listStyle(GroupedListStyle())
             .navigationTitle("Habit Tracker")
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button(action: {
+                        // @TODO
+                    }) {
+                        Image(systemName: "hourglass.badge.plus")
+                        Text("New habit")
+                    }
+                }
+            }
         }
     }
 }

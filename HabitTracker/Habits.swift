@@ -14,5 +14,8 @@ struct HabitItem: Identifiable, Codable {
 }
 
 class Habits: ObservableObject {
-    @Published var items = [HabitItem]()
+    @Published var items = [
+        HabitItem(title: "Guitar", description: "Playing the guitar"),
+        HabitItem(title: "Kotlin", description: "Writing Kotlin code")
+    ]
 }
