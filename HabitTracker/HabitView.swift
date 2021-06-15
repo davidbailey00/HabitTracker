@@ -10,32 +10,39 @@ import SwiftUI
 struct HabitView: View {
     @State private var title: String
     @State private var description: String
+    @State private var times: Int
 
     var body: some View {
         Form {
-            VStack(spacing: 0) {
-                if title != "" {
-                    Text("Title")
-                        .font(.caption)
-                        .foregroundColor(.secondary)
-                        .frame(maxWidth: .infinity, alignment: .leading)
+            Section(header: Text("Habit details")) {
+                VStack(spacing: 0) {
+                    if title != "" {
+                        Text("Title")
+                            .font(.caption)
+                            .foregroundColor(.secondary)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                    }
+
+                    TextField("Title", text: $title)
                 }
+                .animation(.default)
 
-                TextField("Title", text: $title)
-            }
-            .animation(.default)
+                VStack(spacing: 0) {
+                    if description != "" {
+                        Text("Description")
+                            .font(.caption)
+                            .foregroundColor(.secondary)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                    }
 
-            VStack(spacing: 0) {
-                if description != "" {
-                    Text("Description")
-                        .font(.caption)
-                        .foregroundColor(.secondary)
-                        .frame(maxWidth: .infinity, alignment: .leading)
+                    TextField("Description", text: $description)
                 }
-
-                TextField("Description", text: $description)
+                .animation(.default)
             }
-            .animation(.default)
+
+            Section(header: Text("Times completed")) {
+                Stepper("\(times) times", value: $times, in: 0 ... (times + 1))
+            }
         }
         .navigationTitle(title == "" ? "Untitled" : title)
     }
@@ -43,6 +50,7 @@ struct HabitView: View {
     init(habit: HabitItem) {
         title = habit.title
         description = habit.description
+        times = habit.times
     }
 }
 
